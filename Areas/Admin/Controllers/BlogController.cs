@@ -4,6 +4,7 @@ using communicator.Context;
 using Microsoft.AspNetCore.Identity;
 using communicator.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace communicator.Areas.Admin.Controllers;
 
@@ -11,6 +12,7 @@ namespace communicator.Areas.Admin.Controllers;
 /// this is blog for admin ;
 /// </summary>
 [Area("Admin")]
+[Authorize]
 public class BlogController : Controller{
     private readonly ApplicationContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
