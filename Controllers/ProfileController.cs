@@ -19,14 +19,49 @@ public class ProfileController : Controller
         _context = context;
         _userManager = userManager;
     }
+    /// <summary>
+    ///     0 is not friend
+    ///     1 is friend
+    ///     2 is pending
+    ///     3 is requested
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet]
     public IActionResult Index(string? id)
     {
         if (id != null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string user = _userManager.GetUserId(User);
+                Friend? friend = _context.friends.Where(p => p.First_UserId == user || p.Second_UserId == user).FirstOrDefault();
+                if (friend == null)
+                {
+                    ViewData["friend"] = 0;
+                }
+                else
+                {
+                    if (friend.pending == false && friend.friend == true)
+                    {
+                        ViewData["friend"] = 1;
+                    }
+                    else
+                    {
+                        if (friend.First_UserId == user && friend.pending == true)
+                        {
+                            ViewData["friend"] = 2;
+                        }
+                        else
+                        {
+                            ViewData["friend"] = 3;
+                        }
+                    }
+                }
+            }
             ProfileViewModel? profile = _context.profiles.Include(p => p.User).Where(p => p.Id.Equals(id)).Select(i => new ProfileViewModel
             {
-                UserId=i.UserId,
+                UserId = i.UserId,
                 DisplayName = i.DisplayName,
                 address = i.address,
                 Date_Of_Birth = i.Date_Of_Birth,

@@ -2,6 +2,7 @@
 
 @{
     string phonenumber = Model.PhoneNumber ?? "No Phone Number Added";
+    int? friend_key = (int?)ViewData["friend"];
 }
 
 <div class="row w-100 m-0 p-0 mb-1">
@@ -11,8 +12,9 @@
         <div class="col">
             <div class="shadow-sm rounded-bottom position-sticky top-0">
                 <div class="p-3 m-1 d-block">
-                    <a asp-action="Update" asp-controller="Profile" class='text-decoration-none text-dark'><span>Edit Your Profile</span></a>
-                    
+                    <a asp-action="Update" asp-controller="Profile" class='text-decoration-none text-dark'><span>Edit Your
+                            Profile</span></a>
+
                 </div>
                 <div class="p-3 m-1 d-block">
                     <a href="#" class='text-decoration-none text-dark'><span>Reset Your Password</span></a>
@@ -30,11 +32,44 @@
         <div class="d-flex m-1 justify-content-end me-auto py-2">
             @if (Context.User.Identity.Name != Model.Email)
             {
-                <div>
-                    <a class="btn btn-light text-decoration-none" role="button" asp-action="Make" asp-controller="Friend" asp-route-id=@Model.UserId> 
-                        Add Friend
-                    </a>
-                </div>
+                switch (friend_key)
+                {
+                    case 0:
+                        <div>
+                            <a class="btn btn-light text-decoration-none" role="button" asp-action="Make" asp-controller="Friend"
+                        asp-route-id=@Model.UserId>
+                                Add Friend
+                            </a>
+                        </div>
+                        break;
+                    case 1:
+                        <div>
+                            <a class="btn btn-primary text-decoration-none" role="button" asp-action="Index" asp-controller="Blog">
+                                Friend
+                            </a>
+                        </div>
+                        break;
+                    case 2:
+                        <div>
+                            <a class="btn btn-secondary text-decoration-none" role="button" >
+                                Pending
+                            </a>
+                        </div>
+                        break;
+                    case 3:
+                        <div>
+                            <a class="btn btn-primary text-decoration-none" role="button" asp-action="Make" asp-controller="Friend"
+                        asp-route-id=@Model.UserId>
+                                Accept
+                            </a>
+                            <a class="btn btn-Light text-decoration-none" role="button" asp-action="Make" asp-controller="Friend"
+                        asp-route-id=@Model.UserId>
+                                Cencel
+                            </a>
+                        </div>
+                        break;
+                }
+
             }
         </div>
         <div class="p-3 border-bottom border-1 mt-2">
