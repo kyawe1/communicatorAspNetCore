@@ -26,7 +26,10 @@ builder.Services.ConfigureApplicationCookie(options=>{
     options.LogoutPath="/identity/logout";
     options.Cookie.HttpOnly=true;
     options.ExpireTimeSpan=TimeSpan.FromMinutes(100);
+    options.SlidingExpiration = true;
 });
+
+
 
 builder.Services.AddAuthorization(options =>
 {
