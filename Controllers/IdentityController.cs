@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using communicator.Entity;
 using communicator.Models;
 using communicator.Context;
+using communicator.ActionFiltersFolder;
 
 namespace communicator.Controllers;
 
@@ -21,15 +22,20 @@ public class IdentityController:Controller{
 
 
     [HttpGet]  
+    [AnnonymousOnly]
     public IActionResult Login(){
         return View();
     } 
     [HttpGet]
+    [AnnonymousOnly]
+
     public IActionResult Register(string? next){
          return View();
     }
     [HttpPost] 
     [ValidateAntiForgeryToken] 
+    [AnnonymousOnly]
+
     public async Task<IActionResult> Login(LoginViewModel model){
         if(ModelState.IsValid){
             var result =await  _signInManager.PasswordSignInAsync(model.Email,model.Password,model.RememberMe,false);
@@ -44,6 +50,8 @@ public class IdentityController:Controller{
     } 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [AnnonymousOnly]
+
     public IActionResult Register(RegisterViewModel model,string? next){
         if(ModelState.IsValid){
             var user=new ApplicationUser(){
