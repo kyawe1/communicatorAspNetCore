@@ -17,6 +17,16 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddUserManager<UserManager<ApplicationUser>>().AddSignInManager<SignInManager<ApplicationUser>>().AddEntityFrameworkStores<ApplicationContext>();
 
+builder.Services.Configure<IdentityOptions>(options=>{
+    options.User.RequireUniqueEmail=true;
+});
+
+builder.Services.ConfigureApplicationCookie(options=>{
+    options.LoginPath="/identity/login";
+    options.LogoutPath="/identity/logout";
+    options.Cookie.HttpOnly=true;
+    options.ExpireTimeSpan=TimeSpan.FromMinutes(100);
+});
 
 builder.Services.AddAuthorization(options =>
 {

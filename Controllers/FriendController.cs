@@ -53,12 +53,13 @@ public class FriendController : Controller
         }
         return View(profile1.Id);
     }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Confirm(string Id)
+    // [HttpPost]
+    // [ValidateAntiForgeryToken]
+    [HttpGet]
+    public IActionResult Confirm(string id)
     {
-        string id = _userManager.GetUserId(User);
-        Friend? temp = _context.friends.Where(f => f.Second_UserId == Id && f.Id == Id).FirstOrDefault();
+        string Id = _userManager.GetUserId(User);
+        Friend? temp = _context.friends.Where(f => f.Second_UserId == Id && f.First_UserId==id).FirstOrDefault();
         if (temp != null)
         {
             temp.friend = true;
@@ -69,7 +70,7 @@ public class FriendController : Controller
             {
                 return NotFound();
             }
-            return View(profile1.Id);
+            return RedirectToAction("Index","Profile",new {id=profile1.Id});
             
         }
         return RedirectToAction("Index");
