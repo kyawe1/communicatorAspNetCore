@@ -1,0 +1,53 @@
+@model IEnumerable<BlogViewModel>
+@{
+    int jo=0;
+}
+
+<div>
+    <table class='table table-active table-striped'>
+        <thead>
+            <tr>
+                <td>
+                    Number
+                </td>
+                <td>
+                    Title
+                </td>
+                <td>
+                    Content
+                </td>
+                <td>
+                    User_Name
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var i in Model)
+            {
+                <tr>
+                    <td>
+                        @{Html.Display(Convert.ToString(++jo));}  
+                        @jo                
+                    </td>
+                    <td>
+                        @Html.DisplayFor(j=> i.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(j=> i.Content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(j=> i.User.UserName)
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-controller="Blog" asp-area="Admin" asp-route-Id=@i.Id class='btn btn-warning mx-2'>Update</a>
+                        <a asp-action="Delete" asp-controller="Blog" asp-area="Admin" asp-route-Id=@i.Id class='btn btn-danger mx-2'>Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

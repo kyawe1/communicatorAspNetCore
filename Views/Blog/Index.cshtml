@@ -1,0 +1,11 @@
+@model IEnumerable<communicator.Models.BlogViewModel>
+
+<div class="m-2 px-3">
+    <div class="m-1 p-1 col-12 col-md-10 m-auto">
+        <a asp-action="Create" asp-controller="Blog" class=' w-100 btn btn-primary p-2' role="button"> Create </a>
+    </div>
+    @foreach (BlogViewModel i in Model)
+    {
+        <partial name="_AbstractBlogCard" model=i></partial>
+    }
+</div>

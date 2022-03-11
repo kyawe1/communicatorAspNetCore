@@ -1,0 +1,22 @@
+@model LoginViewModel
+
+<div class='d-md-flex justify-content-center p-4 m-3'>
+    <form asp-controller="Identity" asp-action="Login" method='post'>
+        @Html.AntiForgeryToken()
+        <div class='m-2'>
+            <label asp-for="Email" class='form-label'>Email</label>
+            <input asp-for="Email" class='form-control'>
+        </div>
+        <div class='m-2'>
+            <label asp-for="Password" class='form-label'>Password</label>
+            <input asp-for="Password" class='form-control'>
+        </div>
+        <div class='m-2'>
+            <input asp-for="RememberMe" class='form-check-input'>
+            <label asp-for="RememberMe" class='form-check-label'>Confirm Password</label>
+        </div>
+        <div class='m-2'>
+            <input type='submit' class='btn btn-primary' value='Login'>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+@model ProfileViewModel
+
+@{
+    string phonenumber = Model.PhoneNumber ?? "No Phone Number Added";
+}
+
+<div class="row w-100 m-0 p-0 mb-1">
+
+    @if (Context.User.Identity.Name == Model.Email)
+    {
+        <div class="col">
+            <div class="shadow-sm rounded-bottom position-sticky top-0">
+                <div class="p-3 m-1 d-block">
+                    <a asp-action="Update" asp-controller="Profile" class='text-decoration-none text-dark'><span>Edit Your Profile</span></a>
+                    
+                </div>
+                <div class="p-3 m-1 d-block">
+                    <a href="#" class='text-decoration-none text-dark'><span>Reset Your Password</span></a>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div class="col-md-9 col-12 shadow-sm overflow-auto d-block m-auto">
+        <div class="col-md-9 col-12 m-auto mb-1">
+            <img src="~/img/default.jpg" class="img-fluid rounded-3 py-1" />
+        </div>
+
+        <div class="d-flex m-1 justify-content-end me-auto py-2">
+            @if (Context.User.Identity.Name != Model.Email)
+            {
+                <div>
+                    <a class="btn btn-light text-decoration-none" role="button" asp-action="Make" asp-controller="Friend" asp-route-id=@Model.UserId> 
+                        Add Friend
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="p-3 border-bottom border-1 mt-2">
+            <div class="p-1 h5 fw-normal">Name</div>
+            <div class="px-3 m-1"> @Model.DisplayName </div>
+        </div>
+        <div class="p-3 border-bottom border-1">
+            <div class="p-1 h5 fw-normal">Email</div>
+            <div class="px-3 m-1"> @Model.Email </div>
+        </div>
+        <div class="p-3 border-bottom border-1">
+            <div class="p-1 h5 fw-normal">Phone Number</div>
+            <div class="px-3 m-1"> @phonenumber </div>
+        </div>
+        <div class="p-3 border-bottom border-1">
+            <div class="p-1 h5 fw-normal">
+                Address
+            </div>
+            <div class="px-3 m-1"> @Model.address </div>
+        </div>
+        <div class="p-3 border-bottom border-1">
+            <div class="p-1 h5 fw-normal">Date Of Birth</div>
+            <div class="px-3 m-1"> @Model.Date_Of_Birth </div>
+        </div>
+    </div>
+
+</div>

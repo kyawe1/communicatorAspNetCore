@@ -1,0 +1,48 @@
+@model BlogViewModel
+
+
+<div class="row position-relative row mx-2 h-100 g-3 justify-content-center mb-2">
+    <div class="col-md-9 col-12 mx-2 px-2">
+        <div class=" row row-cols-1">
+            <div class="card rounded-2 p-2 shadow-sm">
+                <div class="p-1 m-1 mb-2">
+                    <div class="d-flex">
+                        <div class="fw-bold fs-5">
+                            @Model.Author.Email
+                        </div>
+                        <div class="d-block ms-auto">
+                            <a asp-action="Save" asp-controller="Blog" asp-route-Id=@Model.Id class="btn btn-primary">Save</a>
+                        @if (User.Identity.Name == @Model.Author.UserName)
+                        {
+                                <a asp-action="Update" asp-controller="Blog" asp-route-Id=@Model.Id class="btn btn-warning">Update</a>
+                                <form asp-action="Delete" asp-controller="Blog" asp-route-Id=@Model.Id method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input class="btn btn-danger" type="submit" role="button" value="Delete">
+                                </form>
+                        }
+                        </div>
+                    </div>
+                </div>
+                <a asp-action="Detail" asp-controller="Blog" asp-route-id=@Model.Id  class="text-decoration-none text-dark">
+                <div class="px-3 py-1">
+                    <img src="~/img/default.jpg" class="rounded card-img-top mb-1">
+                </div>
+                <div class="card-body mb-1 text-wrap">
+                    <article class='m-1'>
+                        @Model.Title
+                    </article>
+                    <article class='m-1 p-1 text-truncate'>
+                        @Model.Content
+                    </article>
+                </div>
+                </a>
+                <div class="px-2 border-top border-1 border-dark">
+                    <span class="fs-6 m-1 pt-3 pb-2">likes 2</span><span class="fs-6 m-1 pt-3 pb-2">read person 0</span>
+                </div>
+            </div>
+            <!-- this is card -->
+        </div>
+    </div>
+    <!-- this is row -->
+
+</div>

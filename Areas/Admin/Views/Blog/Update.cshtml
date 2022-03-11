@@ -1,0 +1,23 @@
+@model CreateBlog
+@{
+
+}
+<div class='m-2'>
+<form method='post'>
+    <div class='p-2 mb-1'>
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class='form-control' placeholder="Title"/>
+    </div>
+    <div class='p-2 mb-1'>
+        <label asp-for="Content" class="form-label">Content</label>
+        <textarea asp-for="Content" class='form-control' placeholder="Content"></textarea>
+    </div>
+    <div class='p-2 mb-1'>
+        <label asp-for="User" class="form-label">User Id</label>
+        <input asp-for="User" class='form-control' aria-readonly=true />
+    </div>
+     <div class='p-2 mb-1'>
+        <input type='submit' class='btn btn-primary' />
+    </div>
+</form>
+</div>

@@ -1,0 +1,30 @@
+@model communicator.Models.BlogViewModel
+
+<div class="m-2 px-3 w-75 m-auto">
+    <div class="d-block float-end position-relative">
+        @if (Model.Author.UserName == User.Identity.Name)
+        {
+            <a asp-action="Update" asp-controller="Blog" asp-route-Id=@Model.Id class="btn btn-warning">Update</a>
+            <form asp-action="Delete" asp-controller="Blog" asp-route-Id=@Model.Id method="post">
+                @Html.AntiForgeryToken()
+                <input class="btn btn-danger" type="submit" role="button" value="Delete">
+            </form>
+        }
+    </div>
+    <div class="p-2 mx-2">
+        <div class="h4 mb-2"> @Model.Author.UserName </div>
+    </div>
+    <img src="./template.jpg" width="700" class="img-fluid m-auto d-block mb-2">
+
+    <div class="p-2 mx-2">
+        <div class='p-1 m-1 h5'>
+            @Model.Title
+        </div>
+        <p class="p-2 m-1 ">
+            @Model.Content
+        </p>
+        <div class="pt-2 pb-1 border-top border-1 my-2">
+            <span class="fs-6 m-2 p-1">likes 2</span><span class="fs-6 m-2 p-1">read person 0</span>
+        </div>
+    </div>
+</div>

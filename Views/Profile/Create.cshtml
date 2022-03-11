@@ -1,0 +1,29 @@
+@model ProfileCreateViewModel
+
+<div class='m-1 p-3 m-auto d-block'>
+
+    <form class="m-2 p-2" method="post" asp-action="Create" asp-controller="Profile">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div class="lh-lg">
+            <label asp-for="DisplayName" class='form-label'>Display Name</label>
+            <input asp-for="DisplayName" class='form-control' placeholder="Display Name"/>
+        </div>
+        <div class="lh-lg">
+            <label asp-for="address" class='form-label'>Address</label>
+            <input asp-for="address" class='form-control' placeholder="Address"/>
+        </div>
+        <div class="lh-lg">
+            <label asp-for="Date_Of_Birth" class='form-label'>Date Of Birth</label>
+            <input asp-for="Date_Of_Birth" class='form-control' />
+        </div>
+        <div class="mt-2">
+            <input type='submit' class='d-block btn btn-primary w-100 rounded m-auto' value="Create Profile" />
+        </div>
+    </form>
+
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}
