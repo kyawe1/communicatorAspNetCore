@@ -12,7 +12,7 @@ namespace communicator.Areas.Admin.Controllers;
 /// this is blog for admin ;
 /// </summary>
 [Area("Admin")]
-[Authorize(Roles="Admin")]
+// [Authorize(Roles="Admin")]
 public class BlogController : Controller{
     private readonly ApplicationContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
