@@ -1,4 +1,6 @@
 using communicator.Entity;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace communicator.Models;
 
@@ -6,6 +8,8 @@ public class BlogCreateViewModel
 {
     public string Title { set; get; }
     public string Content { set; get; }
+    [DataType(DataType.Upload)]
+    public IFormFile? Image{set;get;}
 }
 public class BlogViewModel
 {

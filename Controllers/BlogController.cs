@@ -92,7 +92,7 @@ public class BlogController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize]
-    public IActionResult Create([Bind(new string[] { "Title", "Content" })] BlogCreateViewModel model)
+    public IActionResult Create([Bind(new string[] { "Title", "Content" , "Image" })] BlogCreateViewModel model)
     {
         if (ModelState.IsValid)
         {
