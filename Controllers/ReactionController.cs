@@ -13,15 +13,19 @@ public class ReactionController : Controller
     {
         _context = context;
     }
-    [HttpPost]
+    // [HttpPost]
     [Authorize]
-    [ValidateAntiForgeryToken]
-    public IActionResult Like(string blogId)
+    // [ValidateAntiForgeryToken]
+    [HttpGet]
+    public IActionResult Like(string id)
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
+        if(_context.reactions.Where(p=>p.BlogId==id && p.UserId==userId).Count()!=0){
+            return RedirectToAction("Index", "Blog");
+        }
         var reaction = new Reaction()
         {
-            BlogId = blogId,
+            BlogId = id,
             UserId = userId,
             IsLike = true
         };
@@ -31,14 +35,15 @@ public class ReactionController : Controller
 
         return RedirectToAction("Index", "Blog");
     }
-    [HttpPost]
+    // [HttpPost]
     [Authorize]
-    [ValidateAntiForgeryToken]
-    public IActionResult UnLike(string blogId)
+    // [ValidateAntiForgeryToken]
+    [HttpGet]
+    public IActionResult UnLike(string id)
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
 
-        var reaction = _context.reactions.FirstOrDefault(r => r.BlogId == blogId && r.UserId == userId);
+        var reaction = _context.reactions.FirstOrDefault(r => r.BlogId == id && r.UserId == userId);
         if (reaction == null)
         {
             return BadRequest();

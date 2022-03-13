@@ -44,7 +44,9 @@ public class BlogController : Controller
         foreach(var i in blogs)
         {
             Profile p=context.profiles.Where(p=>p.UserId==i.AuthorId).First();
+            long react_count=context.reactions.Where(p=> p.BlogId==i.Id).Count();
             i.ProfileId=p.Id;
+            i.reactionCount=react_count;
             i.Name=p.DisplayName;
         }
         return View(blogs);
@@ -70,6 +72,8 @@ public class BlogController : Controller
             return NotFound();
         }
         Profile p=context.profiles.Where(p=>p.UserId==blog.AuthorId).First();
+        long react_count=context.reactions.Where(p=> p.BlogId==blog.Id).Count();
+        blog.reactionCount=react_count;
         blog.ProfileId=p.Id;
         blog.Name=p.DisplayName;
         return View(blog);

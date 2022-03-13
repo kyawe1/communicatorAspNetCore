@@ -26,7 +26,7 @@
             @Model.Content
         </p>
         <div class="pt-2 pb-1 border-top border-1 my-2">
-            <span class="fs-6 m-2 p-1">likes 2</span><span class="fs-6 m-2 p-1">read person 0</span>
+            <a asp-action="Like" asp-controller="Reaction" asp-route-id=@Model.Id class="fs-6 m-1 pt-3 pb-2 text-dark text-decoration-none">@Model.reactionCount  Likes </a>
         </div>
     </div>
 </div>
