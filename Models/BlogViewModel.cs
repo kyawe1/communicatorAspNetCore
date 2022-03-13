@@ -18,4 +18,5 @@ public class BlogViewModel
     public string Name{set;get;}
     public string ProfileId{set;get;}
     public long reactionCount{set;get;}=0;
+    public bool liked {set;get;}=false;
 }

@@ -45,6 +45,8 @@ public class BlogController : Controller
         {
             Profile p=context.profiles.Where(p=>p.UserId==i.AuthorId).First();
             long react_count=context.reactions.Where(p=> p.BlogId==i.Id).Count();
+            string userId=_userManager.GetUserId(User);
+            i.liked=context.reactions.Where(p=> p.BlogId==i.Id && p.UserId==userId).FirstOrDefault()!=null;
             i.ProfileId=p.Id;
             i.reactionCount=react_count;
             i.Name=p.DisplayName;
@@ -73,6 +75,8 @@ public class BlogController : Controller
         }
         Profile p=context.profiles.Where(p=>p.UserId==blog.AuthorId).First();
         long react_count=context.reactions.Where(p=> p.BlogId==blog.Id).Count();
+        string userId=_userManager.GetUserId(User);
+        blog.liked=context.reactions.Where(p=> p.BlogId==blog.Id && p.UserId==userId).FirstOrDefault()!=null;
         blog.reactionCount=react_count;
         blog.ProfileId=p.Id;
         blog.Name=p.DisplayName;

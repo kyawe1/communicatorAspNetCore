@@ -129,7 +129,7 @@ public class ProfileController : Controller
         string Id = _userManager.GetUserId(User);
         ProfileCreateViewModel? profile = _context.profiles.Where(p => p.UserId.Equals(Id)).Select(i => new ProfileCreateViewModel
         {
-            Date_Of_Birth = (DateTime)i.Date_Of_Birth,
+            Date_Of_Birth = i.Date_Of_Birth,
             DisplayName = i.DisplayName,
             address = i.address
         }).FirstOrDefault();

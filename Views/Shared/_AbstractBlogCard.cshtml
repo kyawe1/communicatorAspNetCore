@@ -36,9 +36,11 @@
                     </article>
                 </div>
                 </a>
+                @if(!Model.liked){
                 <div class="px-2 border-top border-1 border-dark">
                     <a asp-action="Like" asp-controller="Reaction" asp-route-id=@Model.Id class="fs-6 m-1 pt-3 pb-2 text-dark text-decoration-none">@Model.reactionCount  Likes </a>
                 </div>
+                }
             </div>
             <!-- this is card -->
         </div>
