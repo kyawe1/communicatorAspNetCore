@@ -1,3 +1,5 @@
+@model SaveViewModel
+
 <div class="row border-1 border rounded-1 w-75 m-auto m-0 p-0">
     <div class="col-12 col-lg-4">
         <img src="./template.jpg" class="img-fluid p-1 ">
@@ -6,14 +8,14 @@
 
         <div class="p-2 m-1 px-3">
             <div class="mb-1">
-                Name
+                <a asp-action="Index" asp-controller="Profile" asp-route-id=@Model.ProfileId class="text-decoration-none text-dark">@Model.Name</a>
             </div>
             <div class="mb-1">
                 <span>Created At:</span>
-                <span>17/12.2021</span>
+                <span>@Model.BlogCreatedAt</span>
             </div>
             <div>
-                <span class="btn btn-primary">ReadMore</span>
+                <a asp-action="Detail" asp-controller="Blog" asp-route-id=@Model.BlogId class='btn btn-primary'>ReadMore</a>
                 <span class="btn btn-warning">UnSave</span>
             </div>
         </div>

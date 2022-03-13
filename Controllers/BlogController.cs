@@ -32,9 +32,17 @@ public class BlogController : Controller
             Id = i.Id,
             Title = i.Title,
             Content = i.Content,
-            Author = i.User,
-            CreatedAt = i.CreaetedAt
+            AuthorId = i.User.Id,
+            CreatedAt = i.CreaetedAt,
+            AuthorEmail=i.User.UserName
         }).OrderBy(p => p.CreatedAt).ToList();
+
+        foreach(var i in blogs)
+        {
+            Profile p=context.profiles.Where(p=>p.UserId==i.AuthorId).First();
+            i.ProfileId=p.Id;
+            i.Name=p.DisplayName;
+        }
         return View(blogs);
     }
     /// <summary>
@@ -50,12 +58,16 @@ public class BlogController : Controller
             Id = i.Id,
             Title = i.Title,
             Content = i.Content,
-            Author = i.User,
-            CreatedAt = i.CreaetedAt
+            AuthorId = i.User.Id,
+            CreatedAt = i.CreaetedAt,
+            AuthorEmail=i.User.UserName
         }).FirstOrDefault();
         if(blog == null ){
             return NotFound();
         }
+        Profile p=context.profiles.Where(p=>p.UserId==blog.AuthorId).First();
+        blog.ProfileId=p.Id;
+        blog.Name=p.DisplayName;
         return View(blog);
     }
 

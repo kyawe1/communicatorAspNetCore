@@ -1,1 +1,5 @@
-@model communicator.Entity.Save
+@model IEnumerable<SaveViewModel>
+
+@foreach( var i in Model){
+    <partial name="_SaveCard" model=i></partial>
+}
