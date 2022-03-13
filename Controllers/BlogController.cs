@@ -25,8 +25,10 @@ public class BlogController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Index(int pageNumber=1)
     {
+        int perpage=2;
+        int start=(pageNumber-1)*perpage;
         IEnumerable<BlogViewModel> blogs = context.Blogs.AsNoTracking().Include(p => p.User).Select(i => new BlogViewModel()
         {
             Id = i.Id,
@@ -35,8 +37,10 @@ public class BlogController : Controller
             AuthorId = i.User.Id,
             CreatedAt = i.CreaetedAt,
             AuthorEmail=i.User.UserName
-        }).OrderBy(p => p.CreatedAt).ToList();
-
+        }).OrderByDescending(p => p.CreatedAt).Skip(start).Take(perpage).ToList();
+        int total=context.Blogs.Count();
+        int pages=total/perpage;
+        ViewBag.totalpages=pages;
         foreach(var i in blogs)
         {
             Profile p=context.profiles.Where(p=>p.UserId==i.AuthorId).First();

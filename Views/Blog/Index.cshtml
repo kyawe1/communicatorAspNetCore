@@ -8,4 +8,9 @@
     {
         <partial name="_AbstractBlogCard" model=i></partial>
     }
+    <div class="btn-group mx-auto d-block" role="group" aria-label="Basic example">
+    @for(int i=1;i<ViewBag.totalpages;i++){
+        <button type="button" class="btn btn-primary mx-2" role="button">@i</button>
+    }
+    </div>
 </div>
