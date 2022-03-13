@@ -19,4 +19,6 @@ public class ProfileCreateViewModel
     public string address { set; get; }
     [DataType(DataType.DateTime)]
     public DateTime? Date_Of_Birth { set; get; }
+    [DataType(DataType.Upload)]
+    public IFormFile Image{set;get;}
 }
