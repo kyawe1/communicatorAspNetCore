@@ -61,6 +61,7 @@ public class IdentityController:Controller{
             var result=_userManager.CreateAsync(user,model.Password).Result;
             if (result.Succeeded){
                 Profile profile = new Profile{
+                    DisplayName=model.UserName,
                     UserId=user.Id
                 };
                 _context.profiles.Add(profile);

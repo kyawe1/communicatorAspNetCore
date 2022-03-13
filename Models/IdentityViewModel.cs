@@ -15,6 +15,9 @@ public class RegisterViewModel
     public string Email { get; set; }
     [Required]
     [BindRequired]
+    public string UserName { get; set; }
+    [Required]
+    [BindRequired]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
     public string Password { get; set; }

@@ -166,6 +166,7 @@ public class BlogController : Controller
     // [HttpPost]
     // [ValidateAntiForgeryToken]
     [HttpGet]
+    [Authorize]
     public IActionResult Save(string id){
         var blog=context.Blogs.Where(p=> p.Id==id).FirstOrDefault();
         if(blog == null ){
